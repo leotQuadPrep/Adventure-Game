@@ -2,7 +2,7 @@ import GlobalContanor
 
 
 class Creature:
-    def __init__(self, name, weight, drops, health, value, hunger=None, thirst=None, safety=None, bored=None, social=None, location=""):
+    def __init__(self, name, weight, drops, health, value, hunger=None, thirst=None, safety=None, bored=None, social=None, personality=None, location=""):
         self.name = name
         self.weight = weight
         self.drops = drops
@@ -14,6 +14,7 @@ class Creature:
         self.safety = safety
         self.bored = bored
         self.social = social
+        self.personality = personality
 
     def __str__(self):
         return f"{self.name} {self.weight} {self.drops} {self.health} {self.value}"
@@ -33,6 +34,6 @@ class Creature:
     def set_location(self, level):
         self.location = level
 
-    def move(self):
-        if 1 == 1:
-            i = 0
+    def act(self):
+        action_list = self.location.actions
+        action = self.personality.evaluate(action_list)

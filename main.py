@@ -5,6 +5,8 @@ from InputBox import *
 from Sword import Sword
 from Creature import Creature
 from Door import Door
+from PersonalityTraits import PersonalityTraits
+from Personality import Personality
 from Weapon import Weapon
 import GlobalContanor
 IronSword = Sword("Iron Sword", 1, 5, 20, 1)
@@ -126,7 +128,20 @@ Cottage_Door_Outside1.set_door_pair(Cottage_Door_Inside1)
 Cottage_Door_Inside1.set_door_pair(Cottage_Door_Outside1)
 Cottage_Trapdoor_Bottom1.set_door_pair(Cottage_Trapdoor_Top1)
 Cottage_Trapdoor_Top1.set_door_pair(Cottage_Trapdoor_Bottom1)
-Rabbit1.set_location(Inside_Of_Cottage1)
+Rabbit1.set_location(Forest_Trail_Northwest1)
+Rabbit2.set_location(West_Of_Cottage1)
+Rabbit3.set_location(Dead_Forest_Trail_End1)
+Rabbit4.set_location(Forest_Trail_Northwest1)
+
+# Hunger = PersonalityTraits(10, 5, 1, 4, 5)
+# Thirst = PersonalityTraits(10, 5, 1, 5, 6)
+# Social = PersonalityTraits(10, 5, 1, 5, 2)
+# Safety = PersonalityTraits(10, 5, 1, 5, 4)
+# Bored = PersonalityTraits(10, 5, 1, 5, 1)
+# emotions_traits = [Hunger, Thirst, Social, Safety, Bored]
+# Emotions = Personality(emotions_traits)
+# Emotions.evaluate([[1, 6], [0, 5], [1, 12]])
+# print(Emotions.optimal_action)
 
 
 def main():
