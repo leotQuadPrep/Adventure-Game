@@ -56,36 +56,36 @@ cottage_attic_occupants1 = []
 cottage_attic_doors1 = [GlobalContanor.Compare_Door1, GlobalContanor.Compare_Door1, GlobalContanor.Compare_Door1, GlobalContanor.Compare_Door1, GlobalContanor.Compare_Door1, GlobalContanor.Compare_Door1,
                         GlobalContanor.Compare_Door1, GlobalContanor.Compare_Door1, GlobalContanor.Compare_Door1, Cottage_Trapdoor_Top1]
 Forest_Trail_Fork1 = Level("You are in a forest on a trail that forks", forest_trail_fork_directions1,
-                           forest_trail_fork_occupants1, "", "", "", "", "", "", "", "", "", "")
+                           forest_trail_fork_occupants1, "", "", "", "", "", "", "", "", "", "", [])
 Forest_Trail_Northeast1 = Level("You are in a forest on a trail", forest_trail_northeast_directions1,
-                                forest_trail_northeast_occupants1, "", "", "", "", "", "", "", "", "", "")
+                                forest_trail_northeast_occupants1, "", "", "", "", "", "", "", "", "", "", [])
 Forest_Trail_Northwest1 = Level("You are in a forest on a trail", forest_trail_northwest_directions1,
-                                forest_trail_northwest_occupants1, "", "", "", "", "", "", "", "", "", "")
+                                forest_trail_northwest_occupants1, "", "", "", "", "", "", "", "", "", "", [])
 Dead_Forest_Trail_End1 = Level("You are on a dead end trail on the border of a forest and a dead forest. The "
                                "trail leads back into the forest",
                                dead_forest_trail_end_directions1, dead_forest_trail_end_occupants1, "", "", "", "", "",
-                               "", "", "", "", "")
+                               "", "", "", "", "", [])
 Forest_Canyon_Trail_End1 = Level("You are on the edge of a canyon and a forest with a trail leading into the "
                                  "forest and a broken bridge across the canyon", forest_canyon_trail_end_directions1,
-                                 forest_canyon_trail_end_occupants1, "", "", "", "", "", "", "", "", "", "")
+                                 forest_canyon_trail_end_occupants1, "", "", "", "", "", "", "", "", "", "", [])
 South_Of_Cottage1 = Level("You are on the edge of a clearing in a forest. There is a cottage to the north of"
                           " you in the center of the clearing", south_of_cottage_directions1,
-                          south_of_cottage_occupants1, "", "", "", "", "", "", "", "", "", "")
+                          south_of_cottage_occupants1, "", "", "", "", "", "", "", "", "", "", [])
 West_Of_Cottage1 = Level("You are in clearing in a forest. There is a cottage to the east of you in the center of the "
                          "clearing. There is a window on this side of the cottage", west_of_cottage_directions1,
-                         west_of_cottage_occupants1, "", "", "", "", "", "", "", "", "", "", "", west_of_cottage_doors1)
+                         west_of_cottage_occupants1, "", "", "", "", "", "", "", "", "", "", [], west_of_cottage_doors1, [[5,1,1,1]])
 East_Of_Cottage1 = Level("You are in clearing in a forest. There is a cottage to the west of you in the center of the "
                          "clearing. There is a window on this side of the cottage", east_of_cottage_directions1,
-                         east_of_cottage_occupants1, "", "", "", "", "", "", "", "", "", "", "", east_of_cottage_doors1)
+                         east_of_cottage_occupants1, "", "", "", "", "", "", "", "", "", "", [], east_of_cottage_doors1)
 North_Of_Cottage1 = Level("You are in clearing in a forest. There is a cottage to the south of you in the center of the"
                           " clearing. There is a door on this side of the cottage", north_of_cottage_directions1,
-                          north_of_cottage_occupants1, "", "", "", "", "", "", "", "", "", "", "",
+                          north_of_cottage_occupants1, "", "", "", "", "", "", "", "", "", "", [],
                           north_of_cottage_doors1)
 Inside_Of_Cottage1 = Level("You are in a cottage with little furnishings, two windows let in some light",
                            inside_of_cottage_directions1, inside_of_cottage_occupants1, "", "", "", "", "", "", "", "",
-                           "", "", "", inside_of_cottage_doors1)
+                           "", "", [], inside_of_cottage_doors1)
 Cottage_Attic1 = Level("You are in a small attic", cottage_attic_directions1, cottage_attic_occupants1, "", "", "", "",
-                       "", "", "", "", "", "", "", cottage_attic_doors1)
+                       "", "", "", "", "", "", [], cottage_attic_doors1)
 Forest_Trail_Fork1.set_northeast(Forest_Trail_Northeast1)
 Forest_Trail_Fork1.set_northwest(Forest_Trail_Northwest1)
 Forest_Trail_Fork1.set_south(Dead_Forest_Trail_End1)
@@ -132,16 +132,28 @@ Rabbit1.set_location(Forest_Trail_Northwest1)
 Rabbit2.set_location(West_Of_Cottage1)
 Rabbit3.set_location(Dead_Forest_Trail_End1)
 Rabbit4.set_location(Forest_Trail_Northwest1)
+Forest_Trail_Fork1.set_actions()
+Forest_Trail_Northeast1.set_actions()
+Forest_Trail_Northwest1.set_actions()
+Dead_Forest_Trail_End1.set_actions()
+Forest_Canyon_Trail_End1.set_actions()
+South_Of_Cottage1.set_actions()
+West_Of_Cottage1.set_actions()
+East_Of_Cottage1.set_actions()
+North_Of_Cottage1.set_actions()
+Inside_Of_Cottage1.set_actions()
+Cottage_Attic1.set_actions()
 
-# Hunger = PersonalityTraits(10, 5, 1, 4, 5)
-# Thirst = PersonalityTraits(10, 5, 1, 5, 6)
-# Social = PersonalityTraits(10, 5, 1, 5, 2)
-# Safety = PersonalityTraits(10, 5, 1, 5, 4)
-# Bored = PersonalityTraits(10, 5, 1, 5, 1)
-# emotions_traits = [Hunger, Thirst, Social, Safety, Bored]
-# Emotions = Personality(emotions_traits)
-# Emotions.evaluate([[1, 6], [0, 5], [1, 12]])
-# print(Emotions.optimal_action)
+Hunger = PersonalityTraits(10, 5, 1, 5, 5)
+Thirst = PersonalityTraits(10, 5, 1, 5, 6)
+Social = PersonalityTraits(10, 5, 1, 5, 3)
+Safety = PersonalityTraits(10, 5, 1, 5, 4)
+Bored = PersonalityTraits(10, 5, 1, 5, 2)
+emotions_traits = [Hunger, Thirst, Social, Safety, Bored]
+Emotions = Personality(emotions_traits)
+Emotions.exist()
+Emotions.evaluate([[1, 1, 0, 1], [0, 2, 1, 1], [1, 2, 0, 1], [4, 7, 0, 1], [4, 1, 3, 1], [1, 1, 4, 1]])
+print(Emotions.optimal_action)
 
 
 def main():
@@ -175,6 +187,7 @@ def main():
             timer = 0
             GlobalContanor.gameTime += 1
             print(GlobalContanor.gameTime)
+            print(GlobalContanor.location.animal_actions)
         if GlobalContanor.gameTime == 97:
             GlobalContanor.gameTime = 0
         clock.tick(60)

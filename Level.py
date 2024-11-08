@@ -7,7 +7,7 @@ CompareWeapon = Weapon("CompareWeapon", 0, 0, 0, 0)
 class Level:
     def __init__(self, description, directions=None, occupants=None, level_north=None, level_northeast=None,
                  level_east=None, level_southeast=None, level_south=None, level_southwest=None, level_west=None,
-                 level_northwest=None, level_up=None, level_down=None, action=None, doors=None):
+                 level_northwest=None, level_up=None, level_down=None, action=None, doors=None, animal_actions=None):
         self.description = description
         if directions is None:
             directions = []
@@ -25,6 +25,8 @@ class Level:
         self.level_northwest = level_northwest
         self.level_up = level_up
         self.level_down = level_down
+        if animal_actions is None:
+            animal_actions = []
         self.action = action
         if doors is None:
             doors = []
@@ -39,36 +41,51 @@ class Level:
             doors.insert(9, GlobalContanor.Compare_Door1)
             doors.insert(10, GlobalContanor.Compare_Door1)
         self.doors = doors
+        self.animal_actions = animal_actions
+        self.temp_actions = []
 
     def set_north(self, north):
         self.level_north = north
+        self.temp_actions = [*self.temp_actions, *self.level_north.animal_actions]
 
     def set_northeast(self, northeast):
         self.level_northeast = northeast
+        self.temp_actions = [*self.temp_actions, *self.level_northeast.animal_actions]
 
     def set_east(self, east):
         self.level_east = east
+        self.temp_actions = [*self.temp_actions, *self.level_east.animal_actions]
 
     def set_southeast(self, southeast):
         self.level_southeast = southeast
+        self.temp_actions = [*self.temp_actions, *self.level_southeast.animal_actions]
 
     def set_south(self, south):
         self.level_south = south
+        self.temp_actions = [*self.temp_actions, *self.level_south.animal_actions]
 
     def set_southwest(self, southwest):
         self.level_southwest = southwest
+        self.temp_actions = [*self.temp_actions, *self.level_southwest.animal_actions]
 
     def set_west(self, west):
         self.level_west = west
+        self.temp_actions = [*self.action, *self.level_west.animal_actions]
 
     def set_northwest(self, northwest):
         self.level_northwest = northwest
+        self.temp_actions = [*self.temp_actions, *self.level_northwest.animal_actions]
 
     def set_up(self, up):
         self.level_up = up
+        self.temp_actions = [*self.temp_actions, *self.level_up.animal_actions]
 
     def set_down(self, down):
         self.level_down = down
+        self.temp_actions = [*self.temp_actions, *self.level_down.animal_actions]
+
+    def set_actions(self):
+        self.animal_actions = [*self.temp_actions, *self.animal_actions]
 
     def visited(self):
         # global GlobalContanor.gameTime
@@ -251,7 +268,7 @@ class Level:
                                         #             item_check_index += 1
                                         #         n_index += 1
                                         # if item_check_index == len(j_name):
-                                        if GlobalContanor.contains(action3,j_name):
+                                        if GlobalContanor.contains(action3, j_name):
                                             if j.name.lower() == self.occupants[item_index].name.lower():
                                                 attack_list = m.attack(j)
                                                 if attack_list[0]:

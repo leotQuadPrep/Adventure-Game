@@ -35,5 +35,5 @@ class Creature:
         self.location = level
 
     def act(self):
-        action_list = self.location.actions
+        action_list = self.location.animal_actions
         action = self.personality.evaluate(action_list)
